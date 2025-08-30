@@ -90,7 +90,9 @@ class SelectionManager:
             selectCommand=lambda: self.on_select()
         )
         cmds.button(label="Save Selection", command=lambda _: self.save_selection())
+        cmds.separator(height=5, style='none')
         cmds.button(label="Refresh_list", command=lambda _: self.refresh_list())
+        cmds.separator(height=5, style='none')
         cmds.button(label="Delete Selection", command=lambda _: self.delete_selected())
         cmds.showWindow(self.window)
 
