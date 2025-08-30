@@ -1,6 +1,16 @@
-# Crease UI Tool by Naruse
-# 2025/07/19
-# v0.3
+#--------------------------------------------------------------------------
+# ScriptName: Crease UI Tool
+# Author: Naruse,GPT-4o
+# Contents   :クリースをUIで操作できるようにし、削除もできる。
+# CreatedDate: 2025年07月19日
+# LastUpdate: 2025年08月30日
+# Version: 0.4
+#
+# 《License》
+# Copyright (c) 2025 Naruse
+# Released under the MIT license
+# https://opensource.org/licenses/mit-license.php
+#--------------------------------------------------------------------------
 
 import maya.cmds as cmds
 

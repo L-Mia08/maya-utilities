@@ -1,3 +1,18 @@
+#--------------------------------------------------------------------------
+# ScriptName: Save_and_Restore_Positions
+# Author: Naruse,GPT-4o
+# Contents  :オブジェクトをリストに追加しさいに移動、回転の座標を記録し、記録した座標に戻す。
+# CreatedDate: 2024年12月02日
+# LastUpdate: 2024年12月22日
+# Version: 1.1
+#
+# 《License》
+# Copyright (c) 2024 Naruse
+# Released under the MIT license
+# https://opensource.org/licenses/mit-license.php
+#--------------------------------------------------------------------------
+
+
 import maya.cmds as cmds
 
 # グローバル変数を定義
@@ -172,16 +187,3 @@ def create_gui():
 
 # GUI表示
 create_gui()
-
-#--------------------------------------------------------------------------
-# ScriptName: Save_and_Restore_Positions
-# Author: Naruse,GPT-4o
-# CreatedDate: 2024年12月02日
-# LastUpdate: 2024年12月22日
-# Version: 1.1
-#
-# 《License》
-# Copyright (c) 2024 Naruse
-# Released under the MIT license
-# https://opensource.org/licenses/mit-license.php
-#--------------------------------------------------------------------------

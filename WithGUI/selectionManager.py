@@ -1,3 +1,17 @@
+#--------------------------------------------------------------------------
+# ScriptName: SelectionManager
+# Author: Naruse,GPT-5
+# Contents  :リストにオブジェクトを記録して、選択できる。また名前が変更されても動作する。
+# CreatedDate: 2024年12月02日
+# LastUpdate: 2025年08月30日
+# Version: 1.2
+#
+# 《License》
+# Copyright (c) 2025 Naruse
+# Released under the MIT license
+# https://opensource.org/licenses/mit-license.php
+#--------------------------------------------------------------------------
+
 import maya.cmds as cmds
 
 class SelectionManager:
@@ -94,15 +108,3 @@ class SelectionManager:
 selection_manager = SelectionManager()
 selection_manager.create_ui()
 
-#--------------------------------------------------------------------------
-# ScriptName: SelectionManager
-# Author: Naruse,GPT-5
-# CreatedDate: 2024年12月02日
-# LastUpdate: 2025年08月30日
-# Version: 1.2
-#
-# 《License》
-# Copyright (c) 2025 Naruse
-# Released under the MIT license
-# https://opensource.org/licenses/mit-license.php
-#--------------------------------------------------------------------------
