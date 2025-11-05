@@ -7,20 +7,34 @@
 #include <maya/MDagPath.h>
 #include <maya/MFnDagNode.h>
 #include <maya/MFnDependencyNode.h>
+#include <maya/MEventMessage.h>
 #include <maya/MStatus.h>
 #include <maya/MString.h>
+#include <maya/MPxCommand.h>
 
 #include <sstream>
 #include <vector>
 
 static MCallbackId g_afterDuplicateCallback = 0;
+static MCallbackId g_sceneOpenedCallback = 0;
+static MCallbackId g_newSceneOpenedCallback = 0;
+static bool g_ready = false; // シーン準備完了フラグ
+
+
+// シーンロードまたは新規作成完了時に呼ばれる
+void setReady(void* /*clientData*/)
+{
+    g_ready = true;
+    MGlobal::displayInfo("複製通知プラグイン: シーン準備完了。通知を有効化しました。");
+}
 
 // 選択から名前リストを取得
 static std::vector<std::string> getSelectionNames()
 {
     std::vector<std::string> names;
     MSelectionList sel;
-    if (MGlobal::getActiveSelectionList(sel) != MS::kSuccess) return names;
+    if (MGlobal::getActiveSelectionList(sel) != MS::kSuccess)
+        return names;
 
     MItSelectionList it(sel);
     for (; !it.isDone(); it.next()) {
@@ -33,7 +47,6 @@ static std::vector<std::string> getSelectionNames()
         if (stat == MS::kSuccess) {
             MFnDagNode fnDag(dagPath, &stat);
             if (stat == MS::kSuccess) {
-                // フルパスじゃなく短い名前だけにする
                 names.push_back(std::string(fnDag.name().asChar()));
                 continue;
             }
@@ -53,28 +66,31 @@ static std::vector<std::string> getSelectionNames()
     return names;
 }
 
-
 // コールバック本体：複製後に呼ばれる
 void afterDuplicateCallback(void* /*clientData*/)
 {
+    // シーン準備完了前は無視（起動直後や内部複製を回避）
+    if (!g_ready)
+        return;
+
     // 現在のフォーカスパネルを取得
     MString panel;
     MGlobal::executeCommand("getPanel -wf", panel);
 
-    // Hypershade での操作なら無視する
-    if (panel.indexW("hyperShadePanel") != -1) {
+    // Hypershade での操作なら無視
+    if (panel.indexW("hyperShadePanel") != -1)
         return;
-    }
 
     std::vector<std::string> names = getSelectionNames();
     MString pythonCmd;
 
-    // デフォルトオブジェクトセットが含まれている場合
+    // デフォルト系オブジェクトを除外
     bool containsDefault = false;
     for (const auto& name : names) {
         if (name == "defaultObjectSet" ||
             name == "defaultLightSet" ||
-            name == "defaultHideFaceDataSet") {
+            name == "defaultHideFaceDataSet" ||
+            name.find("default") != std::string::npos) {
             containsDefault = true;
             break;
         }
@@ -87,11 +103,8 @@ void afterDuplicateCallback(void* /*clientData*/)
             "pos='topCenter', fade=True, fadeStayTime=2000, alpha=.9)";
     }
     else if (names.empty()) {
-        // 0件 → 複製失敗の可能性
-        pythonCmd =
-            "import maya.cmds as cmds\n"
-            "cmds.inViewMessage(amg='<hl>複製に失敗している可能性があります</hl>', "
-            "pos='topCenter', fade=True, fadeStayTime=2000, alpha=.9)";
+        // 0件 → 内部複製などの場合は何も表示しない
+        return;
     }
     else if (names.size() == 1) {
         // 1件 → オブジェクト名を表示
@@ -105,11 +118,12 @@ void afterDuplicateCallback(void* /*clientData*/)
     else {
         // 2件以上 → 件数だけ表示
         int count = static_cast<int>(names.size());
-        pythonCmd =
-            "import maya.cmds as cmds\n"
-            "cmds.inViewMessage(amg='<hl>" + MString() + count +
-            " つのオブジェクトが複製されました</hl>', "
-            "pos='topCenter', fade=True, fadeStayTime=2000, alpha=.9)";
+        std::stringstream ss;
+        ss << "import maya.cmds as cmds\n"
+            << "cmds.inViewMessage(amg='<hl>" << count
+            << " つのオブジェクトが複製されました</hl>', "
+            << "pos=\"topCenter\", fade=True, fadeStayTime=2000, alpha=.9)";
+        pythonCmd = ss.str().c_str();
     }
 
     if (!pythonCmd.isEmpty()) {
@@ -117,18 +131,43 @@ void afterDuplicateCallback(void* /*clientData*/)
     }
 }
 
+//--------------------------------------------
+// MELコマンドクラス: 複製通知を手動で有効化
+//--------------------------------------------
+class EnableDuplicateNotifyCmd : public MPxCommand
+{
+public:
+    EnableDuplicateNotifyCmd() {}
+    virtual MStatus doIt(const MArgList&) override
+    {
+        g_ready = true;
+        MGlobal::displayInfo("複製通知プラグイン: 手動で通知を有効化しました。");
+        return MS::kSuccess;
+    }
 
-// プラグイン初期化
+    static void* creator() { return new EnableDuplicateNotifyCmd(); }
+};
+
+//--------------------------------------------
+// initializePlugin に MELコマンド登録を追加
+//--------------------------------------------
 MStatus initializePlugin(MObject obj)
 {
     MStatus status;
-    MFnPlugin plugin(obj, "Naruse,GPT-5", "2025.09.12 v1.2", "2025", &status);
+    MFnPlugin plugin(obj, "Naruse,GPT-5", "2025.11.05 v1.3", "2025", &status);
     if (!status) {
         MGlobal::displayError("オブジェクト複製通知プラグイン: MFnPlugin の初期化に失敗しました");
         return status;
     }
 
-    // 既存コールバックを削除してから登録（多重登録防止）
+    // MELコマンド登録
+    status = plugin.registerCommand("enableDuplicateNotify", EnableDuplicateNotifyCmd::creator);
+    if (!status) {
+        MGlobal::displayError("enableDuplicateNotify コマンド登録に失敗しました");
+        return status;
+    }
+
+    // --- 以下は元の処理 ---
     if (g_afterDuplicateCallback != 0) {
         MMessage::removeCallback(g_afterDuplicateCallback);
         g_afterDuplicateCallback = 0;
@@ -136,25 +175,43 @@ MStatus initializePlugin(MObject obj)
 
     g_afterDuplicateCallback = MModelMessage::addAfterDuplicateCallback(afterDuplicateCallback, nullptr, &status);
     if (!status) {
-        MGlobal::displayError("オブジェクト複製通知プラグイン: afterDuplicate コールバックの登録に失敗しました");
+        MGlobal::displayError("afterDuplicate コールバックの登録に失敗しました");
         return status;
     }
 
-    MGlobal::displayInfo("オブジェクト複製通知プラグインがロードされました。: 複製後に通知します。");
+    g_sceneOpenedCallback = MEventMessage::addEventCallback("SceneOpened", setReady);
+    g_newSceneOpenedCallback = MEventMessage::addEventCallback("NewSceneOpened", setReady);
+
+    MGlobal::displayInfo(
+        "オブジェクト複製通知プラグインがロードされました。\n"
+        "シーンロード後に通知が有効になります。\n"
+        "通知が表示されない場合は [enableDuplicateNotify;] を MEL で実行してください。"
+    );
+
     return MS::kSuccess;
 }
 
-
-// プラグイン終了時クリーンアップ
+//--------------------------------------------
+// uninitializePlugin に MELコマンド解除を追加
+//--------------------------------------------
 MStatus uninitializePlugin(MObject obj)
 {
-    MStatus status;
-    // コールバック削除
+    MFnPlugin plugin(obj);
+    plugin.deregisterCommand("enableDuplicateNotify");
+
     if (g_afterDuplicateCallback != 0) {
         MMessage::removeCallback(g_afterDuplicateCallback);
         g_afterDuplicateCallback = 0;
     }
-    MFnPlugin plugin(obj);
+    if (g_sceneOpenedCallback != 0) {
+        MMessage::removeCallback(g_sceneOpenedCallback);
+        g_sceneOpenedCallback = 0;
+    }
+    if (g_newSceneOpenedCallback != 0) {
+        MMessage::removeCallback(g_newSceneOpenedCallback);
+        g_newSceneOpenedCallback = 0;
+    }
+
     MGlobal::displayInfo("オブジェクト複製通知プラグインがアンロードされました。");
     return MS::kSuccess;
 }
