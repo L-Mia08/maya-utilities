@@ -1,0 +1,102 @@
+//--------------------------------------------------------------------------
+// ScriptName: SkinValueTool
+// Author: Naruse,GPT-4o
+// Contents: Paint Skin Weights Tool の Value をボタンまたはスライダーで変更できるGUI
+// CreatedDate: 2024年11月23日
+// LastUpdate: 2025年11月24日
+//--------------------------------------------------------------------------
+
+
+// UIウィンドウ作成
+if (`window -exists skinValueUI`) {
+    deleteUI skinValueUI;
+}
+window -title "SkinValueTool" -widthHeight 170 300 skinValueUI;
+
+// レイアウト作成
+columnLayout -adjustableColumn true;
+
+// 現在選択されているオブジェクトを取得
+string $selectedObjects[] = `ls -sl`;
+
+// 選択されているオブジェクトの数を確認
+if (size($selectedObjects) == 1) {
+    // 1つだけ選択されている場合、そのオブジェクト名を表示
+    print("選択されているオブジェクト: " + $selectedObjects[0] + "\n");
+    select -r $selectedObjects[0]; // 現在選択されているオブジェクトを選択
+    ArtPaintSkinWeightsToolOptions; // Paint Skin Weights Toolを起動
+
+} else if (size($selectedObjects) > 1) {
+    // 複数選択されている場合、エラーメッセージを表示
+    print("オブジェクトが複数選択されているため、Paint Skin Weights Toolは起動できません\n");
+} else {
+    // 何も選択されていない場合
+    print("オブジェクトが選択されてないため、Paint Skin Weights Toolは起動できません\n");
+}
+
+// スライダー作成整数（上スライダー）
+global string $slider;
+$slider = `floatSliderGrp -field true -min 0.0 -max 1.0 -value 0.0 -fmx 1.0 -step 0.1`;
+
+// セパレーター
+separator -style "none" -height 5;
+
+// スライダー作成小数点（下スライダー）
+global string $slider2;
+$slider2 = `floatSliderGrp -field true -min 0.00 -max 0.09 -value 0.00 -fmx 0.09 -step 0.01`;
+
+// セパレーター
+separator -style "none" -height 5;
+
+// ボタン作成
+button -label "Slide Set Value" -command "setSliderValue()";
+
+// セパレーター(黒い線)
+separator -height 10 -style "out";
+
+// ボタン作成
+float $values[] = {0.0, 0.1, 0.25, 0.5, 0.75, 0.9, 1.0};
+for ($value in $values) {
+    string $label = ("Set Value " + $value); //ボタンの文字設定
+    button -label $label -command ("setButtonValue(" + $value + ")");
+}
+
+// UI表示
+showWindow skinValueUI;
+
+// スライダーから設定
+global proc setSliderValue() {
+    global string $slider;  // グローバル変数:上スライダー
+    global string $slider2; // グローバル変数:下スライダー
+    float $sliderValue = `floatSliderGrp -query -value $slider`;
+    float $sliderValue2 = `floatSliderGrp -query -value $slider2`;
+
+// $sliderValue と $sliderValue2 を合計
+$sliderValueMerge = $sliderValue + $sliderValue2;
+
+// Value値を設定するコマンド
+    if (catch(`artSkinSetSelectionValue $sliderValueMerge false artAttrSkinPaintCtx artAttrSkin`)) {
+        // エラー時の処理
+        print("エラーが発生しました: Paint Skin Weights Toolを起動してください\n");
+
+    } else {
+        print ("Set skin Value to: " + $sliderValueMerge + "\n");
+    }
+}
+
+// ボタンから設定
+global proc setButtonValue(float $value) {
+    // Value値を設定するコマンド
+    // コマンドを実行し、エラーをキャッチ
+    if (catch(`artSkinSetSelectionValue $value false artAttrSkinPaintCtx artAttrSkin`)) {
+        // エラー時の処理
+        print("エラーが発生しました: Paint Skin Weights Toolを起動してください\n");
+
+    } else {
+        print ("Set skin Value to: " + $value + "\n");
+    }
+}
+
+// 変数のリセット
+clear $selectedObjects;
+clear $values;
