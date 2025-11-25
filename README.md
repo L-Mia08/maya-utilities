@@ -7,7 +7,7 @@
 ・Windows 11 Pro <br>
 ・Visual Studio Code <br>
 ・Visual Studio 2022 <br>
-・Maya 2025 <br>
+・Maya 2023,2025 <br>
 ・ChatGPT <br>
 ・Gemini <br>
 
