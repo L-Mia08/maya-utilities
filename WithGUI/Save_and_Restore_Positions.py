@@ -1,7 +1,7 @@
 #--------------------------------------------------------------------------
 # ScriptName: Save_and_Restore_Positions
 # Author: Naruse,GPT-4o
-# Contents  :オブジェクトをリストに追加しさいに移動、回転の座標を記録し、記録した座標に戻す。
+# Contents  :オブジェクトをリストに追加し移動、回転の座標を記録し、記録した座標に戻す。
 # CreatedDate: 2024年12月02日
 # LastUpdate: 2024年12月22日
 # Version: 1.1
