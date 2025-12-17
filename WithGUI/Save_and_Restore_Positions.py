@@ -69,7 +69,7 @@ def save_selected_objects_and_positions():
     cmds.textScrollList("objectList", edit=True, removeAll=True)
     for data in saved_object_data.values():
         # リスト名を変数に
-        list_item = f"{data['name']} || Pos: {' '.join(map(lambda x: str(int(x)), data['position']))} | Rot: {' '.join(map(lambda x: str(int(x)), data['rotation']))}"
+        list_item = f"{data['name']} || Tra: {' '.join(map(lambda x: str(int(x)), data['position']))} | Rot: {' '.join(map(lambda x: str(int(x)), data['rotation']))}"
 
         cmds.textScrollList("objectList", edit=True, append=list_item)
 
@@ -124,7 +124,7 @@ def restore_selected_object_position():
                         if all_items:
                             for i, item in enumerate(all_items):
                                 if selected_obj == item:
-                                    new_item = f"{obj_name} || Pos: {' '.join(map(lambda x: str(int(x)), data['position']))} | Rot: {' '.join(map(lambda x: str(int(x)), data['rotation']))}"
+                                    new_item = f"{obj_name} || Tra: {' '.join(map(lambda x: str(int(x)), data['position']))} | Rot: {' '.join(map(lambda x: str(int(x)), data['rotation']))}"
                                     cmds.textScrollList("objectList", edit=True, removeIndexedItem=(i + 1))  # 古い項目を削除
                                     cmds.textScrollList("objectList", edit=True, appendPosition=[i + 1, new_item])  # 新しい項目を挿入
                                     print(f"UUID: {uuid} | オブジェクト名: {obj_name} | リスト内のオブジェクト名を {obj_name} に変更しました")
