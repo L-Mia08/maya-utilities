@@ -1,9 +1,9 @@
 #--------------------------------------------------------------------------
 # ScriptName: ConnectComponents_SoftenEdge
 # Author: Naruse,GPT-5
-# Contents :Connect Componentsで生成したエッジをソフトエッジにするスクリプト
+# Contents :Connect Componentsをソフトエッジで生成するスクリプト
 # CreatedDate: 2025年11月19日
-# LastUpdate: 2025年11月19日
+# LastUpdate: 2025年12月17日
 # Version: 0.1
 #
 # 《License》
