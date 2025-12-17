@@ -71,7 +71,7 @@ def reset_all_attributes(selected_curves):
             # Get shape nodes
             shapes = cmds.listRelatives(curve, shapes=True, fullPath=True) or []
             valid_curve = any(cmds.nodeType(shape) == 'nurbsCurve' for shape in shapes)
-            
+
             if valid_curve:
                 try:
                     for axis in ['X', 'Y', 'Z']:
