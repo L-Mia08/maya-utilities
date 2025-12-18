@@ -1,5 +1,5 @@
 #--------------------------------------------------------------------------
-# ScriptName: autoSave
+# ScriptName: autoSetProject
 # Author: Naruse,T.T,GPT-4o
 # Contents: autoSetProjectを設定するスクリプト
 # CreatedDate: 2024年06月04日
