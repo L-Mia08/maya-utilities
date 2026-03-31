@@ -1,12 +1,13 @@
 #--------------------------------------------------------------------------
 # ScriptName: Pivot_move_to_Selected_vertices
+# Author: L-Mia08,GPT-5
 # Contents : 選択した頂点にピポットを移動また、複数の頂点が選択されている場合は平均位置に移動する。
 # Creation Date: 2024/11/19
 # Update Date: 2025/11/24
 # Version: 0.2
 
 # 《License》
-# Copyright (c) 2025 Naruse
+# Copyright (c) 2025 L-Mia08
 # Released under the MIT license
 # https://opensource.org/licenses/mit-license.php
 #--------------------------------------------------------------------------

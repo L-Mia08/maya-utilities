@@ -1,13 +1,13 @@
 #--------------------------------------------------------------------------
 # ScriptName: Crease UI Tool
-# Author: Naruse,GPT-4o
+# Author: L-Mia08,GPT-4o
 # Contents   :クリースをUIで操作できるようにし、削除もできる。
 # CreatedDate: 2025年07月19日
 # LastUpdate: 2025年08月30日
 # Version: 0.4
 #
 # 《License》
-# Copyright (c) 2025 Naruse
+# Copyright (c) 2025 L-Mia08
 # Released under the MIT license
 # https://opensource.org/licenses/mit-license.php
 #--------------------------------------------------------------------------

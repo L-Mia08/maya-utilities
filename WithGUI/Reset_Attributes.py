@@ -1,6 +1,6 @@
 # --------------------------------------------------------------------------
 # ScriptName: Reset_Attributes
-# Author: Naruse,GPT-5,GPT-4o
+# Author: L-Mia08,GPT-5,GPT-4o
 # Contents: 選択した曲線の移動および回転属性のリセットツール
 #           (Tool to reset translation and rotation attributes of selected curves.)
 # CreatedDate: 2024年12月23日
@@ -8,7 +8,7 @@
 # Version:0.2
 #
 # 《License》
-# Copyright (c) 2025 Naruse
+# Copyright (c) 2025 L-Mia08
 # Released under the MIT license
 # https://opensource.org/licenses/mit-license.php
 # --------------------------------------------------------------------------

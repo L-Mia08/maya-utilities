@@ -1,13 +1,13 @@
 # --------------------------------------------------------------------------
 # ScriptName: Material obj Export
-# Author: Naruse,GPT-4o
+# Author: L-Mia08,GPT-4o
 # Contents: 選択したオブジェクトのマテリアルを球に適用し、球または板をエクスポート、インポートできるスクリプト
 # CreatedDate: 2025年3月4日
 # LastUpdate: 2025年3月4日
 # Version:0.1
 #
 # 《License》
-# Copyright (c) 2025 Naruse
+# Copyright (c) 2025 L-Mia08
 # Released under the MIT license
 # https://opensource.org/licenses/mit-license.php
 # --------------------------------------------------------------------------

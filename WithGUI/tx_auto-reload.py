@@ -1,13 +1,13 @@
 #--------------------------------------------------------------------------
 # ScriptName: tx auto reload
-# Author: Naruse,GPT-5
+# Author: L-Mia08,GPT-5
 # Contents   : 選択したテクスチャノードを数秒ごとに自動的にロードする
 # CreatedDate: 2025年10月13日
 # LastUpdate: 2025年10月13日
 # Version: 0.1
 #
 # 《License》
-# Copyright (c) 2025 Naruse
+# Copyright (c) 2025 L-Mia08
 # Released under the MIT license
 # https://opensource.org/licenses/mit-license.php
 #--------------------------------------------------------------------------

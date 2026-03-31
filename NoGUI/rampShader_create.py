@@ -1,13 +1,13 @@
 #--------------------------------------------------------------------------
 # ScriptName: rampShader_create
-# Author: Naruse,GPT-5
+# Author: L-Mia08,GPT-5
 # Contents   :サーフェス シェーダやランプシェーダを作成してカラーとシャドウのテクスチャを設定してノードを作成するスクリプト
 # CreatedDate: 2025年09月13日
 # LastUpdate: 2025年09月29日
 # Version: 0.2
 #
 # 《License》
-# Copyright (c) 2025 Naruse
+# Copyright (c) 2025 L-Mia08
 # Released under the MIT license
 # https://opensource.org/licenses/mit-license.php
 #--------------------------------------------------------------------------

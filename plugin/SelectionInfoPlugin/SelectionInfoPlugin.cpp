@@ -153,7 +153,7 @@ public:
 // ========== プラグイン登録 ==========
 MStatus initializePlugin(MObject obj)
 {
-    MFnPlugin plugin(obj, "Naruse.GPT-5", "2025.09.07 v1.1", "2025");
+    MFnPlugin plugin(obj, "L-Mia08.GPT-5", "2025.09.07 v1.1", "2025");
 
     MStatus status = plugin.registerCommand("selInfoObject", SelInfoObjectCmd::creator);
     CHECK_MSTATUS_AND_RETURN_IT(status);

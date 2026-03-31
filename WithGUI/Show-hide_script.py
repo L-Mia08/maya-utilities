@@ -1,13 +1,13 @@
 #--------------------------------------------------------------------------
 # ScriptName: Show-hide_script
-# Author: Naruse,GPT-5
+# Author: L-Mia08,GPT-5
 # Contents  :非表示にしたオブジェクトを記録して、再度一括で表示できる。
 # CreatedDate: 2025年08月30日
 # LastUpdate: 2025年08月30日
 # Version: 1.3
 #
 # 《License》
-# Copyright (c) 2025 Naruse
+# Copyright (c) 2025 L-Mia08
 # Released under the MIT license
 # https://opensource.org/licenses/mit-license.php
 #--------------------------------------------------------------------------

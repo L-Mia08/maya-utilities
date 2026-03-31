@@ -1,13 +1,13 @@
 # --------------------------------------------------------------------------
 # ScriptName: Vertex Snapper
-# Author: Naruse,GPT-5,GPT-4o
+# Author: L-Mia08,GPT-5,GPT-4o
 # Contents: 複数の頂点を同時にスナップ移動できるスクリプト
 # CreatedDate: 2024年12月23日
 # LastUpdate: 2025年11月24日
 # Version:0.2
 #
 # 《License》
-# Copyright (c) 2025 Naruse
+# Copyright (c) 2025 L-Mia08
 # Released under the MIT license
 # https://opensource.org/licenses/mit-license.php
 # --------------------------------------------------------------------------

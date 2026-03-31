@@ -1,13 +1,13 @@
 #--------------------------------------------------------------------------
 # ScriptName: SelectionManager
-# Author: Naruse,GPT-5
+# Author: L-Mia08,GPT-5
 # Contents  :リストにオブジェクトを記録して、選択できる。また名前が変更されても動作する。
 # CreatedDate: 2024年12月02日
 # LastUpdate: 2025年08月30日
 # Version: 1.2
 #
 # 《License》
-# Copyright (c) 2025 Naruse
+# Copyright (c) 2025 L-Mia08
 # Released under the MIT license
 # https://opensource.org/licenses/mit-license.php
 #--------------------------------------------------------------------------

@@ -1,13 +1,13 @@
 #--------------------------------------------------------------------------
 # ScriptName: Save_and_Restore_Positions
-# Author: Naruse,GPT-4o
+# Author: L-Mia08,GPT-4o
 # Contents  :オブジェクトをリストに追加し移動、回転の座標を記録し、記録した座標に戻す。
 # CreatedDate: 2024年12月02日
 # LastUpdate: 2024年12月22日
 # Version: 1.1
 #
 # 《License》
-# Copyright (c) 2024 Naruse
+# Copyright (c) 2024 L-Mia08
 # Released under the MIT license
 # https://opensource.org/licenses/mit-license.php
 #--------------------------------------------------------------------------

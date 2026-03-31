@@ -1,13 +1,13 @@
 #--------------------------------------------------------------------------
 # ScriptName: autoSetProject
-# Author: Naruse,T.T,GPT-4o
+# Author: L-Mia08,T.T,GPT-4o
 # Contents: autoSetProjectを設定するスクリプト
 # CreatedDate: 2024年06月04日
 # LastUpdate: 2025年11月25日
 # Version: 0.3
 #
 # 《License》
-# Copyright (c) 2025 Naruse
+# Copyright (c) 2025 L-Mia08
 # Released under the MIT license
 # https://opensource.org/licenses/mit-license.php
 #--------------------------------------------------------------------------

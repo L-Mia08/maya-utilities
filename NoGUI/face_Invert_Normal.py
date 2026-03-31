@@ -1,13 +1,13 @@
 #--------------------------------------------------------------------------
 # ScriptName: face_Invert_Normal
-# Author: Naruse,GPT-4o
+# Author: L-Mia08,GPT-4o
 # Contents   :選択したオブジェクトの法線を外側に向けてスムースするスクリプト
 # CreatedDate: 2025年08月16日
 # LastUpdate: 2025年09月29日
 # Version: 0.2
 #
 # 《License》
-# Copyright (c) 2025 Naruse
+# Copyright (c) 2025 L-Mia08
 # Released under the MIT license
 # https://opensource.org/licenses/mit-license.php
 #--------------------------------------------------------------------------

@@ -154,7 +154,7 @@ public:
 MStatus initializePlugin(MObject obj)
 {
     MStatus status;
-    MFnPlugin plugin(obj, "Naruse,GPT-5", "2025.11.05 v1.3", "2025", &status);
+    MFnPlugin plugin(obj, "L-Mia08,GPT-5", "2025.11.05 v1.3", "2025", &status);
     if (!status) {
         MGlobal::displayError("オブジェクト複製通知プラグイン: MFnPlugin の初期化に失敗しました");
         return status;
